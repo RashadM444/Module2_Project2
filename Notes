@@ -1,0 +1,15 @@
+1. User inputs data into relevant fields
+2. User clicks 'filter' button
+3. The class APPLICATION is responsible for activating button
+4. Filter button activates the APPLICATION class
+5. the class APPLICATION pulls the input values
+6. the class DEPOSIT pulls the input values
+7.  the class DEPOSIT creates an array of objects with parameters of a deposit required by the User
+8. the class BANKPRODUCT pulls the array from DEPOSIT.
+9. the class BANKPRODUCT finds and maps a new array according to the array from DEPOSIT.
+10. the class CALCULATOR pulls the new array of viable banks from the class BANKPRODUCT.
+11. the class CALCULATOR maps a new array with added object field of final amount of deposit.
+12. the class CALCULATOR filters a new array choosing the objects with the highest final amount.
+13. the class APPLICATION pulls the filtered new array from CALCULATOR
+14. the class APPLICATION filters a new array with object fields required for the table in result of search.
+15. the class APPLICATION changes the html file with inner HTML using the converting object fields of array into <td> tags

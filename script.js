@@ -599,7 +599,7 @@ class BankProduct {
     this.catalog = array;
   }
   chooseViableBanks(arr) {
-    let inputDeposit = new Deposit(10000, 1000, 12, `USD`);
+    let inputDeposit = new Deposit(10000, 1000, 12, `USD`); // you need a function to replace parameters with i
     let arrOfViableBanks = arr.filter(function(val) {
       if (
         val.currency == inputDeposit.currency &&
