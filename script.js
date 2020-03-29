@@ -637,6 +637,9 @@ class Deposit {
     }
 }
 
+let testDepo = new Deposit (100000, 10000, 12, 'RUB'); //Testing...
+console.log(testDepo);
+
 class BankProduct {
     constructor(array, deposit) {
         this.catalog = array;
@@ -663,10 +666,53 @@ class BankProduct {
     }
 }
 
+let testbankprod = new BankProduct(bankCatalog, testDepo);
+let testarray = testbankprod.filterViableBanks();   // Testing..
+
+
+console.log(testarray);
+
 class Calculator {
-  constructor (viabBanks) {
-    
+  constructor (viabBanks, ) {
+    this.arrayFromBankProduct = viabBanks
   }
 
+  calculateTheFinalAmount () {
+
+  }
+
+  mapArrayForFinalDeposit () {
+    let array = this.arrayFromBankProduct;
+    for (let i = 0; i < array.length; i++) {
+      array[i].finalAmount = 10000000000; //right hand should be this.somefunction within class
+    }
+    return array;
+  }
+
+  filterArrayForBestDeposit (){
+    // reduce the the array of Final deposits to the max value then filter the array comparing to the value of max
+  }
 
 }
+
+let testCalc = new Calculator(testarray);
+let test = testCalc.mapArrayForFinalDeposit()  //Testing...
+console.log(test);
+
+
+class Testout {
+  constructor(name, age) {
+    this.name = name,
+    this.age = age;
+  }
+  logtest (){
+    return console.log('it might work');
+  }
+  logitout () {
+    return this.logtest();
+  }
+}
+
+let testa = new Testout('Rashad', 25);
+console.log (testa);
+testa.logitout();
