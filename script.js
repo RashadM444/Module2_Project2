@@ -1,4 +1,4 @@
-let bankcatalog = [
+let bankCatalog = [
   {
     bankName: "Газпромбанк",
     investName: "Ваш успех",
@@ -584,13 +584,59 @@ let bankcatalog = [
   }
 ];
 
+//*___________________________________________________________________*/
+
+console.log(bankCatalog);
+
+class Application {
+  constructor() {
+    this.filter = document
+      .querySelector("button")
+      .addEventListener("click", function() {
+        this.activateFilter();
+      });
+  }
+  activateFilter() {
+    let init = +document.getElementById("initialAmount").value;
+    let monthly = +document.getElementById("monthly").value;
+    let tenor = +document.getElementById("tenor").value;
+    let currency = document.getElementById("currency").value;
+    let response = document.getElementById("response");
+    console.log(monthly, init, tenor, currency, response);
+    if (
+      (init >= 0 &&
+        monthly >= 0 &&
+        tenor > 0 &&
+        tenor % 1 === 0 &&
+        currency == "USD") ||
+      currency == "RUB"
+    ) {
+      this.depo = new Deposit(init, monthly, tenor, currency);
+      this.bankProd = new BankProduct(bankCatalog);
+      this.resultOfCalculator = new Calculator();
+    } else if (init < 0) {
+      response.innerHTML =
+        "<p>The initial amount must be a positive number</p>";
+    } else if (monthly < 0) {
+      response.innerHTML =
+        response.innerHTML +
+        "<p>The monthly amount must be a positive amount</p>";
+    } else if (tenor <= 0) {
+      response.innerHTML =
+        response.innerHTML + "<p>Tenor must be a positive integer</p>";
+    } else if (currency !== "RUB" || currency !== "USD") {
+      response.innerHTML =
+        response.innerHTML + "<p>The available currencies are USD and RUB</p>";
+    }
+  }
+}
+
 class Deposit {
-  //This will hold entry information about the deposit
-  constructor(initial, monthly, tenor, currency) {
-    this.initial = initial;
-    this.monthly = monthly;
-    this.tenor = tenor;
-    this.currency = currency;
+  constructor(paraInitial, paraMonthly, paraTenor, paraCurrency) {
+    this.initial = paraInitial;
+    this.monthly = paraMonthly;
+    this.tenor = paraTenor;
+    this.currency = paraCurrency;
   }
 }
 
@@ -598,8 +644,8 @@ class BankProduct {
   constructor(array) {
     this.catalog = array;
   }
-  chooseViableBanks(arr) {
-    let inputDeposit = new Deposit(10000, 1000, 12, `USD`); // you need a function to replace parameters with i
+  filterViableBanks(arr) {
+    let inputDeposit = new Deposit(1000, 100, 12, "RUB"); // you need a function to replace parameters with i
     let arrOfViableBanks = arr.filter(function(val) {
       if (
         val.currency == inputDeposit.currency &&
@@ -614,7 +660,3 @@ class BankProduct {
     return arrOfViableBanks;
   }
 }
-
-let viableBanks = new BankProduct(bankcatalog);
-console.log(viableBanks);
-console.log(viableBanks.chooseViableBanks(viableBanks.catalog));

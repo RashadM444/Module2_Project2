@@ -13,3 +13,10 @@
 13. the class APPLICATION pulls the filtered new array from CALCULATOR
 14. the class APPLICATION filters a new array with object fields required for the table in result of search.
 15. the class APPLICATION changes the html file with inner HTML using the converting object fields of array into <td> tags
+
+
+3. The class APPLICATION is responsible for activating button
+5. the class APPLICATION pulls the input values
+13. the class APPLICATION pulls the filtered new array from CALCULATOR
+14. the class APPLICATION filters a new array with object fields required for the table in result of search.
+15. the class APPLICATION changes the html file with inner HTML using the converting object fields of array into <td> tags

@@ -24,27 +24,30 @@
       <div class="entryPart">
         <table class="entryTable">
           <tr>
-            <td><label for="">Initial amount</label></td>
-            <td><input type="number" /></td>
+            <td><label for="initialAmount">Initial amount</label></td>
+            <td><input id="initialAmount" type="number" /></td>
           </tr>
           <tr>
-            <td><label for="">Monthly added amount</label></td>
-            <td><input type="number" /></td>
+            <td><label for="monthly">Monthly added amount</label></td>
+            <td><input id="monthly" type="number" /></td>
           </tr>
           <tr>
-            <td><label for="">Tenor of deposit</label></td>
-            <td><input type="number" /></td>
+            <td><label for="tenor">Tenor of deposit</label></td>
+            <td><input id="tenor" type="number" /></td>
           </tr>
           <tr>
-            <td><label for="">Currency of deposit</label></td>
-            <td><input type="text" /></td>
+            <td><label for="currency">Currency of deposit</label></td>
+            <td><input id="currency" type="text" /></td>
           </tr>
         </table>
 
-        <button>Filter</button>
+        <button id="button">Filter</button>
       </div>
-      <div></div>
+      <div id="response"></div>
     </section>
     <script src="script.js"></script>
+    <script>
+      new Application();
+    </script>
   </body>
 </html>
