@@ -608,9 +608,15 @@ class Application {
             currency == "RUB"
         ) {
             let clientDepo = new Deposit(init, monthly, tenor, currency);
-            let probBanks = new BankProduct(bankCatalog, clientDepo);
-                probBanks = probBanks.filterViableBanks();
-            this.resultOfCalculator = new Calculator(probBanks);
+            console.log(clientDepo);
+            let banks = new BankProduct(bankCatalog, clientDepo);
+            let probBanks = banks.filterViableBanks();
+                console.log(probBanks);
+            let calculator = new Calculator (probBanks, clientDepo);
+                console.log(calculator);
+            let lastarray = calculator.mapArrayForFinalDeposit();
+                console.log(lastarray);
+
         } else if (init < 0) {
             response.innerHTML =
                 "<p>The initial amount must be a positive number</p>";
@@ -628,6 +634,45 @@ class Application {
     }
 }
 
+
+class Calculator {
+  constructor (probBanks, clientDepo) {
+    this.arrayFromBankProduct = probBanks
+    this.entryDeposit = clientDepo //you can enter class method by this.function
+  }
+
+  calculateTheFinalAmount (array, entryDeposit) {
+    let init = entryDeposit.initial;
+    let time = entryDeposit.tenor;
+    let monthly = entryDeposit.monthly;
+    let finalAmount = 0;
+
+    for (i = 0; i <array.length; i++) {
+      let percent = array[i].incomeType;
+      for (t = 0; t < time; t++) {
+        finalAmount = finalAmount * (1+percent/12) + monthly;
+      }
+      finalAmount = finalAmount - monthly;
+    }
+    return finalAmount
+  }
+
+  mapArrayForFinalDeposit () {
+    let array = this.arrayFromBankProduct;
+    let sortedArray = array.sort(function (val1, val2) {
+      return val1.incomeType - val2.incomeType;
+    });
+    console.log(sortedArray);
+    let highestRateInArray = sortedArray[sortedArray.length - 1];
+    let filteredArray = array.filter (function(val) {
+      return val.incomeType == highestRateInArray.incomeType;
+    })
+    return filteredArray
+  }
+}
+
+
+
 class Deposit {
     constructor(paraInitial, paraMonthly, paraTenor, paraCurrency) {
         this.initial = paraInitial;
@@ -637,82 +682,14 @@ class Deposit {
     }
 }
 
-let testDepo = new Deposit (100000, 10000, 12, 'RUB'); //Testing...
-console.log(testDepo);
+
 
 class BankProduct {
     constructor(array, deposit) {
         this.catalog = array;
-        // this.viableBanks = this.filterViableBanks();
         this.inputDeposit = deposit;
 
     }
-    filterViableBanks() {
-        let currency = this.inputDeposit.currency;
-        let initial = this.inputDeposit.initial;
-        let tenor = this.inputDeposit.tenor;
-        let arrOfViableBanks = this.catalog.filter(function(val) {
-            if (
-                val.currency == currency &&
-                val.sumMin <= initial &&
-                val.sumMax >= initial &&
-                val.termMin <= tenor &&
-                val.termMax >= tenor
-            ) {
-                return val;
-            }
-        });
-        return arrOfViableBanks;
-    }
-}
 
-let testbankprod = new BankProduct(bankCatalog, testDepo);
-let testarray = testbankprod.filterViableBanks();   // Testing..
-
-
-console.log(testarray);
-
-class Calculator {
-  constructor (viabBanks, ) {
-    this.arrayFromBankProduct = viabBanks
-  }
-
-  calculateTheFinalAmount () {
-
-  }
-
-  mapArrayForFinalDeposit () {
-    let array = this.arrayFromBankProduct;
-    for (let i = 0; i < array.length; i++) {
-      array[i].finalAmount = 10000000000; //right hand should be this.somefunction within class
-    }
-    return array;
-  }
-
-  filterArrayForBestDeposit (){
-    // reduce the the array of Final deposits to the max value then filter the array comparing to the value of max
-  }
 
 }
-
-let testCalc = new Calculator(testarray);
-let test = testCalc.mapArrayForFinalDeposit()  //Testing...
-console.log(test);
-
-
-class Testout {
-  constructor(name, age) {
-    this.name = name,
-    this.age = age;
-  }
-  logtest (){
-    return console.log('it might work');
-  }
-  logitout () {
-    return this.logtest();
-  }
-}
-
-let testa = new Testout('Rashad', 25);
-console.log (testa);
-testa.logitout();
