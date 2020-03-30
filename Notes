@@ -20,3 +20,12 @@
 13. the class APPLICATION pulls the filtered new array from CALCULATOR
 14. the class APPLICATION filters a new array with object fields required for the table in result of search.
 15. the class APPLICATION changes the html file with inner HTML using the converting object fields of array into <td> tags
+
+
+class BankProduct {
+constructor() {
+  array: array of products viable through method2;
+}
+method1: call the deposit info;
+method2: filter the array;
+}
