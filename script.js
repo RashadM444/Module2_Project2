@@ -5,6 +5,7 @@ class Application {
     }
 
     commenceOperation() {
+        document.getElementById('response').innerHTML = '';
         //Create an object with class Deposit const
         let initialInputByClient = +document.getElementById("initialAmount").value;
         let monthlyInputByClient = +document.getElementById("monthly").value;
@@ -20,22 +21,26 @@ class Application {
         if (inputDeposit.initialAmount >= 0) {
             initialAmountDetector = true;
         } else {
+            document.getElementById('response').innerHTML = '';
             alert(`The initial amount must be a positive number`);
         }
         if (inputDeposit.monthlyAmount >= 0) {
             monthlyAmountDetector = true;
         } else {
+            document.getElementById('response').innerHTML = '';
             alert(`The monthly amount must be a positive number`);
         }
         if (inputDeposit.tenor > 0 && inputDeposit.tenor % 1 === 0) {
             tenorDetector = true;
         } else {
+            document.getElementById('response').innerHTML = '';
             alert(`The tenor must be a positive integer`);
         }
         if (inputDeposit.currency == `RUB` || inputDeposit.currency == `rub` ||
             inputDeposit.currency == `USD` || inputDeposit.currency == `usd`) {
             currencyDetector = true;
         } else {
+            document.getElementById('response').innerHTML = '';
             alert(`Only USD and RUB currencies are available at the moment.`)
         }
 
