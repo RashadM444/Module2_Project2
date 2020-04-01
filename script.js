@@ -54,15 +54,16 @@ class Application {
 
             let catalogOfBanks = new BankProduct(bankCatalog);
             let mainArray = catalogOfBanks.array;
-            console.log(mainArray);
-            console.log(inputDeposit);
+            // console.log(mainArray);
+            // console.log(inputDeposit);
 
             let filteringProcess = new Calculator(mainArray, inputDeposit); // continue here
-            console.log(filteringProcess);
+            // console.log(filteringProcess);
 
             //find the array of viable banks - function within CALCULATOR
             let arrayOfPossibleBanks = filteringProcess.filterPossibleArray(inputDeposit);
-            console.log(arrayOfPossibleBanks);
+            // console.log(arrayOfPossibleBanks);
+
             //if array is empty return log ('empty array')
 
             if (arrayOfPossibleBanks.length === 0) {
@@ -71,12 +72,11 @@ class Application {
             }
             //find the array with highest paying rates
             let arrayOfHighestPayingBanks = filteringProcess.filterBestArray(arrayOfPossibleBanks);
-            console.log(arrayOfHighestPayingBanks);
+            // console.log(arrayOfHighestPayingBanks);
             //calculate the final amount of deposit - function within CALCULATOR
             let finalAmountOfDeposit = filteringProcess.calculateFinalAmount(inputDeposit, arrayOfHighestPayingBanks);
-            console.log(finalAmountOfDeposit);
-
-            console.log(finalAmountOfDeposit);
+            // console.log(finalAmountOfDeposit);
+            // console.log(finalAmountOfDeposit);
 
             // take the final array and final amount of deposit and create the table
             let bodyOfTable = '';
@@ -100,14 +100,13 @@ class Calculator {
     constructor(catalog, deposit) {
             this.allBanks = catalog,
                 this.deposit = deposit
-            console.log(this.allBanks);
-
-            console.log(this.deposit);
+                // console.log(this.allBanks);
+                // console.log(this.deposit);
 
         }
         //filter viable banks
     filterPossibleArray = (deposit) => {
-            console.log(deposit);
+            // console.log(deposit);
 
             let monthlyAmountZeroDetector;
             if (deposit.monthlyAmount > 0) {
@@ -115,7 +114,7 @@ class Calculator {
             } else if (deposit.monthlyAmount == 0 || deposit.monthlyAmount == null) {
                 monthlyAmountZeroDetector = true;
             }
-            console.log(monthlyAmountZeroDetector);
+            // console.log(monthlyAmountZeroDetector);
             let possibleArray = this.allBanks.filter(function(val) {
                 if (monthlyAmountZeroDetector == true) {
 
@@ -136,7 +135,7 @@ class Calculator {
                         val.canDeposit == true;
                 }
             });
-            console.log(possibleArray);
+            // console.log(possibleArray);
             return possibleArray;
         }
         //filter array of best options through sort, maxvalue and filter
@@ -181,4 +180,4 @@ class BankProduct {
     }
 }
 
-new Application();
+new Application;
